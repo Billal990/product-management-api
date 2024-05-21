@@ -19,3 +19,8 @@ export const productValidationSchema = z.object({
     variants:z.array(variantValidationSchema),
     inventory:inventoryValidation
 })
+
+
+//define a partial schema for update a product where all fields are optional
+export const updateProductValidationSchema = productValidationSchema.partial();
+

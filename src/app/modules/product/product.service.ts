@@ -17,7 +17,7 @@ const getSingleProductFromDB = async (productId: string) => {
 };
 
 const updateProductIntoDB = async (updateId: string, updateProduct: object) => {
-  const result = await ProductModel.findByIdAndUpdate(updateId, updateProduct);
+  const result = await ProductModel.findByIdAndUpdate(updateId, updateProduct, {new:true});
   return result;
 };
 
@@ -27,7 +27,9 @@ const deleteProductFromDB = async (productId: string) => {
 };
 
 const searchProductsIntoDB = async (searchTerm: string) => {
+  console.log('Searcing term from service==========> ', searchTerm)
   const result = await ProductModel.find({ name: searchTerm });
+  console.log('Result DB==>', result)
   return result;
 };
 
