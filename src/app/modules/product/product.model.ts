@@ -1,4 +1,4 @@
-import { Model, Schema } from 'mongoose';
+import { Schema, model } from 'mongoose';
 import { Product, variants } from './product.interface';
 
 const variantSchema = new Schema<variants>({
@@ -33,4 +33,4 @@ const productSchema = new Schema<Product>({
   variants: [variantSchema],
 });
 
-export const ProductModel = new Model(productSchema, 'Product');
+export const ProductModel = model('Product', productSchema);
