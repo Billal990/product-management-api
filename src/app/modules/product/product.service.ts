@@ -6,8 +6,9 @@ const createNewProductIntoDB = async (newProduct: Product) => {
   return result;
 };
 
-const getAllProductsFromDB = async () => {
-  const result = await ProductModel.find();
+const getAllProductsFromDB = async (searchTerm:string) => {
+  console.log('Get All SErvice======== Query===> ', searchTerm)
+  const result = searchTerm ? await ProductModel.find({name:{$regex:searchTerm, $options:'i'}}) : await ProductModel.find();
   return result;
 };
 
@@ -26,12 +27,6 @@ const deleteProductFromDB = async (productId: string) => {
   return result;
 };
 
-const searchProductsIntoDB = async (searchTerm: string) => {
-  console.log('Searcing term from service==========> ', searchTerm)
-  const result = await ProductModel.find({ name: searchTerm });
-  console.log('Result DB==>', result)
-  return result;
-};
 
 export const productServices = {
   createNewProductIntoDB,
@@ -39,5 +34,4 @@ export const productServices = {
   getSingleProductFromDB,
   updateProductIntoDB,
   deleteProductFromDB,
-  searchProductsIntoDB,
 };

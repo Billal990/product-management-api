@@ -17,7 +17,8 @@ const createNewProduct = async(req:Request, res:Response, next:NextFunction)=>{
 
 const getAllProducts = async(req:Request, res:Response, next:NextFunction)=>{
     try {
-        const result = await productServices.getAllProductsFromDB();
+        const {searchTerm} = req.query;
+        const result = await productServices.getAllProductsFromDB(searchTerm as string);
         respond(res, 200, true, 'Retreved All Products Successfully', result)
     } catch (error) {
         next(error)
@@ -56,15 +57,7 @@ const deleteProduct = async(req:Request, res:Response, next:NextFunction)=>{
     }
 }
 
-const searchProducts = async(req:Request, res:Response, next:NextFunction)=>{
-    try {
-        const {searchTerm} = req.query;
-        const result = await productServices.searchProductsIntoDB(searchTerm as string);
-        !result || result.length === 0 ?  respond(res, 404, false, `No Product Found With The Search Term '${searchTerm}!'`) :  respond(res, 200, true, `Products matching search term ${searchTerm} fetched successfully!`, result)
-    } catch (error) {
-        next(error)
-    }
-}
+
 
 export const studentControllers = {
     createNewProduct,
@@ -72,5 +65,4 @@ export const studentControllers = {
     getSingleProduct,
     updateProduct,
     deleteProduct,
-    searchProducts
 }
