@@ -1,5 +1,10 @@
 import { Schema, model } from 'mongoose';
-import { Product, inventory, variants } from './product.interface';
+import {
+  Product,
+  ProductInterfaceModel,
+  inventory,
+  variants,
+} from './product.interface';
 
 const variantSchema = new Schema<variants>({
   type: {
@@ -23,29 +28,47 @@ const invetorySchema = new Schema<inventory>({
   },
 });
 
-const productSchema = new Schema<Product>({
-  name: {
-    type: String,
-    required: true,
+const productSchema = new Schema<Product, ProductInterfaceModel>(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    category: {
+      type: String,
+      required: true,
+    },
+    tags: [String],
+    variants: [variantSchema],
+    inventory: {
+      type: invetorySchema,
+      required: true,
+    },
   },
-  description: {
-    type: String,
-    required: true,
-  },
-  price: {
-    type: Number,
-    required: true,
-  },
-  category: {
-    type: String,
-    required: true,
-  },
-  tags: [String],
-  variants: [variantSchema],
-  inventory: {
-    type: invetorySchema,
-    required: true,
-  },
+  { versionKey: false },
+);
+
+//create an instance method
+// productSchema.method('isProductExists', async function(name:string){
+//   const existedProduct = await ProductModel.findOne({name})
+//   return existedProduct;
+//  })
+
+//create a static method
+productSchema.static('isProductExists', async function (name: string) {
+  const isExistsProduct = await ProductModel.findOne({ name });
+  return isExistsProduct;
 });
 
-export const ProductModel = model('Product', productSchema);
+export const ProductModel = model<Product, ProductInterfaceModel>(
+  'Product',
+  productSchema,
+);

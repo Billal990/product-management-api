@@ -2,6 +2,11 @@ import { Product } from './product.interface';
 import { ProductModel } from './product.model';
 
 const createNewProductIntoDB = async (newProduct: Product) => {
+  //Check if product alreay exists or not
+  if (await ProductModel.isProductExists(newProduct.name)) {
+    throw new Error('Product already exists!');
+  }
+
   const result = await ProductModel.create(newProduct);
   return result;
 };

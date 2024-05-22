@@ -1,3 +1,5 @@
+import { Model } from 'mongoose';
+
 export type variants = {
   type: string;
   value: string;
@@ -17,3 +19,14 @@ export type Product = {
   variants: variants[];
   inventory: inventory;
 };
+
+//Instance method
+// export interface ProductMethods {
+//   isProductExists(name:string): Promise<Product>;
+// }
+// export type ProductTypeModel = Model<Product, {}, ProductMethods>;
+
+// Static method
+export interface ProductInterfaceModel extends Model<Product> {
+  isProductExists(name: string): Promise<Product>;
+}

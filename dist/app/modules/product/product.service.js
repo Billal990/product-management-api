@@ -12,6 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.productServices = void 0;
 const product_model_1 = require("./product.model");
 const createNewProductIntoDB = (newProduct) => __awaiter(void 0, void 0, void 0, function* () {
+    //Check if product alreay exists or not
+    if (yield product_model_1.ProductModel.isProductExists(newProduct.name)) {
+        throw new Error('Product already exists!');
+    }
     const result = yield product_model_1.ProductModel.create(newProduct);
     return result;
 });
