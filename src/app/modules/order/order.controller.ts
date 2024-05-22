@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from "express";
 import { orderServices } from "./order.service";
-import { Order } from "./order.interface";
 import { respond } from "../../utils/respond";
 import { orderValidationSchema } from "./order.validation";
 import { productServices } from "../product/product.service";
@@ -21,7 +20,7 @@ const createNewOrder = async(req:Request, res:Response, next:NextFunction)=>{
     const orderedProduct = await productServices.getSingleProductFromDB(productId)
 
    //  check if ordered quantity excceeds available inventory quantity
-   let availableQuantity = orderedProduct?.inventory.quantity;
+   const availableQuantity = orderedProduct?.inventory.quantity;
    if(availableQuantity === 0){
      await ProductModel.findByIdAndUpdate(productId, {$set:{"inventory.inStock":false}})
      return res.json({
@@ -58,7 +57,7 @@ const createNewOrder = async(req:Request, res:Response, next:NextFunction)=>{
 
 
 
-const getAllOrders = async(req:Request, res:Response, next:NextFunction)=>{
+const getAllOrders = async(req:Request, res:Response)=>{
    const {email} = req.query;
    const result = await orderServices.getAllOrdersFromDB(email as string)
 

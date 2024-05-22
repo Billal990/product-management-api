@@ -5,8 +5,8 @@ export function respond(
   statusCode: number,
   success: boolean,
   message?: string,
-  data?: any,
-  error?: any,
+  data?: unknown,
+  error?: unknown,
 ) {
   res.status(statusCode).json({
     success,

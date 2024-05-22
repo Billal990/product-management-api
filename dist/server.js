@@ -17,11 +17,18 @@ const app_1 = require("./app");
 const config_1 = __importDefault(require("./app/config"));
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        yield (0, mongoose_1.connect)(config_1.default.database_url);
-        console.log('DB Connected Successfully');
-        app_1.app.listen(config_1.default.port, () => {
-            console.log(`Server is listening on port ${config_1.default.port}`);
-        });
+        try {
+            yield (0, mongoose_1.connect)(config_1.default.database_url);
+            console.log('DB Connected Successfully');
+            app_1.app.listen(config_1.default.port, () => {
+                console.log(`Server is listening on port ${config_1.default.port}`);
+            });
+        }
+        catch (error) {
+            if (error instanceof Error) {
+                console.log('Error in DB==> ', error.message);
+            }
+        }
     });
 }
 main();
