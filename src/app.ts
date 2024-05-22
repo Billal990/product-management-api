@@ -12,6 +12,12 @@ app.use(express.json());
 app.use(cors());
 
 //Application Routes
+app.get('/', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Welcome To The Product Management API',
+  });
+});
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
 

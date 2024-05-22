@@ -15,6 +15,12 @@ exports.app = (0, express_1.default)();
 exports.app.use(express_1.default.json());
 exports.app.use((0, cors_1.default)());
 //Application Routes
+exports.app.get('/', (req, res) => {
+    res.json({
+        success: true,
+        message: 'Welcome To The Product Management API',
+    });
+});
 exports.app.use('/api/products', product_route_1.productRoutes);
 exports.app.use('/api/orders', order_route_1.orderRoutes);
 //Global Error Handler
