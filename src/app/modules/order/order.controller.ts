@@ -61,6 +61,15 @@ const createNewOrder = async(req:Request, res:Response, next:NextFunction)=>{
 const getAllOrders = async(req:Request, res:Response, next:NextFunction)=>{
    const {email} = req.query;
    const result = await orderServices.getAllOrdersFromDB(email as string)
+
+   //Order not found logic
+   if(!result || result?.length === 0){
+      return res.json({
+         "success": false,
+         "message": "Order not found"
+        })
+   }
+
    email ? respond(res, 200, true, `Orders fetched successfully for user email (${email})!`, result) : respond(res, 200, true, 'Orders fetched successfully!', result)
 }
 
