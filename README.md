@@ -23,9 +23,8 @@ Welcome to the Product Management API, a sophisticated backend solution meticulo
 
 3. **Set up environment variables:**
    Create a .env file in the root directory and define the following variables:
-
-PORT=5000 <br>
-MONGODB_URI=`<Your MongoDB connection URI>`
+   PORT=5000 <br>
+   MONGODB_URI=`<Your MongoDB connection URI>`
 
 ## Usage
 
