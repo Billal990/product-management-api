@@ -51,7 +51,7 @@ Welcome to the Product Management API, a sophisticated backend solution meticulo
 - **Retrieve Orders by User Email:** GET /api/orders?email=<userEmail>
 
 ## Live API URL
-You can access the live API at https://l2-b3-assignment2-product-management-api.vercel.app/.
+You can access the live API at https://l2-b3-assignment2-product-management-api.vercel.app/
 
 ## Technologies Used
 
