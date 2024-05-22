@@ -42,10 +42,10 @@ const productSchema = new Schema<Product>({
   },
   tags: [String],
   variants: [variantSchema],
-  inventory:{
-    type:invetorySchema,
-    required:true
-  }
+  inventory: {
+    type: invetorySchema,
+    required: true,
+  },
 });
 
 export const ProductModel = model('Product', productSchema);

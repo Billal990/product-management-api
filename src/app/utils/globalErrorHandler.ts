@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { respond } from './respond';
-import {ZodError, z} from "zod"
+import { ZodError, z } from 'zod';
 export const globalErrorHandler = (
   error: Error | ZodError,
   req: Request,
@@ -8,12 +8,12 @@ export const globalErrorHandler = (
   next: NextFunction,
 ) => {
   if (error) {
-    if(error instanceof z.ZodError){
+    if (error instanceof z.ZodError) {
       respond(res, 400, false, 'Data Validaition Error', null, error);
-    }else{
+    } else {
       respond(res, 400, false, error?.message, null, error);
     }
-  }else{
-    next()
+  } else {
+    next();
   }
 };

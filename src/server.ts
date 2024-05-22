@@ -10,7 +10,7 @@ async function main() {
       console.log(`Server is listening on port ${config.port}`);
     });
   } catch (error) {
-    if(error instanceof Error){
+    if (error instanceof Error) {
       console.log('Error in DB==> ', error.message);
     }
   }

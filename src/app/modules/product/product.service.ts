@@ -6,19 +6,21 @@ const createNewProductIntoDB = async (newProduct: Product) => {
   return result;
 };
 
-const getAllProductsFromDB = async (searchTerm:string) => {
+const getAllProductsFromDB = async (searchTerm: string) => {
   let query = {};
-  if(searchTerm){
+  if (searchTerm) {
     query = {
-      $or:[
-        {name:{$regex:searchTerm, $options:'i'}},
-        {description:{$regex:searchTerm, $options:'i'}},
-        {category:{$regex:searchTerm, $options:'i'}}
-      ]
-    }
+      $or: [
+        { name: { $regex: searchTerm, $options: 'i' } },
+        { description: { $regex: searchTerm, $options: 'i' } },
+        { category: { $regex: searchTerm, $options: 'i' } },
+      ],
+    };
   }
 
-  const result = searchTerm ? await ProductModel.find(query) : await ProductModel.find();
+  const result = searchTerm
+    ? await ProductModel.find(query)
+    : await ProductModel.find();
   return result;
 };
 
@@ -28,7 +30,9 @@ const getSingleProductFromDB = async (productId: string) => {
 };
 
 const updateProductIntoDB = async (updateId: string, updateProduct: object) => {
-  const result = await ProductModel.findByIdAndUpdate(updateId, updateProduct, {new:true});
+  const result = await ProductModel.findByIdAndUpdate(updateId, updateProduct, {
+    new: true,
+  });
   return result;
 };
 
@@ -36,7 +40,6 @@ const deleteProductFromDB = async (productId: string) => {
   const result = await ProductModel.findByIdAndDelete(productId);
   return result;
 };
-
 
 export const productServices = {
   createNewProductIntoDB,

@@ -28,6 +28,12 @@ const getAllProducts = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
     try {
         const { searchTerm } = req.query;
         const result = yield product_service_1.productServices.getAllProductsFromDB(searchTerm);
+        if ((result === null || result === void 0 ? void 0 : result.length) === 0) {
+            return res.json({
+                "success": false,
+                "message": "Product not found"
+            });
+        }
         searchTerm ? (0, respond_1.respond)(res, 200, true, `Products matching search term '${searchTerm}' fetched successfully!`, result) : (0, respond_1.respond)(res, 200, true, 'Products fetched successfully!', result);
     }
     catch (error) {
