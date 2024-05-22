@@ -19,6 +19,12 @@ const getAllProducts = async(req:Request, res:Response, next:NextFunction)=>{
     try {
         const {searchTerm} = req.query;
         const result = await productServices.getAllProductsFromDB(searchTerm as string);
+        if(result?.length === 0){
+           return res.json({
+            "success": false,
+            "message": "Product not found"
+           })
+        }
         searchTerm ? respond(res, 200, true, `Products matching search term '${searchTerm}' fetched successfully!`, result) : respond(res, 200, true, 'Products fetched successfully!', result)
     } catch (error) {
         next(error)
