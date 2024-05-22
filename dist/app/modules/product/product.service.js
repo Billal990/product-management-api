@@ -22,11 +22,13 @@ const getAllProductsFromDB = (searchTerm) => __awaiter(void 0, void 0, void 0, f
             $or: [
                 { name: { $regex: searchTerm, $options: 'i' } },
                 { description: { $regex: searchTerm, $options: 'i' } },
-                { category: { $regex: searchTerm, $options: 'i' } }
-            ]
+                { category: { $regex: searchTerm, $options: 'i' } },
+            ],
         };
     }
-    const result = searchTerm ? yield product_model_1.ProductModel.find(query) : yield product_model_1.ProductModel.find();
+    const result = searchTerm
+        ? yield product_model_1.ProductModel.find(query)
+        : yield product_model_1.ProductModel.find();
     return result;
 });
 const getSingleProductFromDB = (productId) => __awaiter(void 0, void 0, void 0, function* () {
@@ -34,7 +36,9 @@ const getSingleProductFromDB = (productId) => __awaiter(void 0, void 0, void 0, 
     return result;
 });
 const updateProductIntoDB = (updateId, updateProduct) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield product_model_1.ProductModel.findByIdAndUpdate(updateId, updateProduct, { new: true });
+    const result = yield product_model_1.ProductModel.findByIdAndUpdate(updateId, updateProduct, {
+        new: true,
+    });
     return result;
 });
 const deleteProductFromDB = (productId) => __awaiter(void 0, void 0, void 0, function* () {

@@ -30,11 +30,13 @@ const getAllProducts = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
         const result = yield product_service_1.productServices.getAllProductsFromDB(searchTerm);
         if ((result === null || result === void 0 ? void 0 : result.length) === 0) {
             return res.json({
-                "success": false,
-                "message": "Product not found"
+                success: false,
+                message: 'Product not found',
             });
         }
-        searchTerm ? (0, respond_1.respond)(res, 200, true, `Products matching search term '${searchTerm}' fetched successfully!`, result) : (0, respond_1.respond)(res, 200, true, 'Products fetched successfully!', result);
+        searchTerm
+            ? (0, respond_1.respond)(res, 200, true, `Products matching search term '${searchTerm}' fetched successfully!`, result)
+            : (0, respond_1.respond)(res, 200, true, 'Products fetched successfully!', result);
     }
     catch (error) {
         next(error);
@@ -44,7 +46,9 @@ const getSingleProduct = (req, res, next) => __awaiter(void 0, void 0, void 0, f
     try {
         const { productId } = req.params;
         const result = yield product_service_1.productServices.getSingleProductFromDB(productId);
-        !result ? (0, respond_1.respond)(res, 400, false, 'No Product Found!') : (0, respond_1.respond)(res, 200, true, 'Product fetched successfully!', result);
+        !result
+            ? (0, respond_1.respond)(res, 400, false, 'No Product Found!')
+            : (0, respond_1.respond)(res, 200, true, 'Product fetched successfully!', result);
     }
     catch (error) {
         next(error);
@@ -56,7 +60,9 @@ const updateProduct = (req, res, next) => __awaiter(void 0, void 0, void 0, func
         const updateProduct = req.body;
         product_validation_1.updateProductValidationSchema.parse(updateProduct);
         const result = yield product_service_1.productServices.updateProductIntoDB(productId, updateProduct);
-        !result ? (0, respond_1.respond)(res, 400, false, 'No Product Found To Update!') : (0, respond_1.respond)(res, 200, true, 'Product updated successfully!', result);
+        !result
+            ? (0, respond_1.respond)(res, 400, false, 'No Product Found To Update!')
+            : (0, respond_1.respond)(res, 200, true, 'Product updated successfully!', result);
     }
     catch (error) {
         next(error);
@@ -66,7 +72,9 @@ const deleteProduct = (req, res, next) => __awaiter(void 0, void 0, void 0, func
     try {
         const { productId } = req.params;
         const result = yield product_service_1.productServices.deleteProductFromDB(productId);
-        !result ? (0, respond_1.respond)(res, 400, false, 'No Product Found To Delete') : (0, respond_1.respond)(res, 200, true, 'Product deleted successfully!', null);
+        !result
+            ? (0, respond_1.respond)(res, 400, false, 'No Product Found To Delete')
+            : (0, respond_1.respond)(res, 200, true, 'Product deleted successfully!', null);
     }
     catch (error) {
         next(error);

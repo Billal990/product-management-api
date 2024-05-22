@@ -24,19 +24,27 @@ const createNewOrder = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
         //  check if ordered quantity excceeds available inventory quantity
         const availableQuantity = orderedProduct === null || orderedProduct === void 0 ? void 0 : orderedProduct.inventory.quantity;
         if (availableQuantity === 0) {
-            yield product_model_1.ProductModel.findByIdAndUpdate(productId, { $set: { "inventory.inStock": false } });
+            yield product_model_1.ProductModel.findByIdAndUpdate(productId, {
+                $set: { 'inventory.inStock': false },
+            });
             return res.json({
                 success: false,
-                message: 'Insufficient quantity available in inventory'
+                message: 'Insufficient quantity available in inventory',
             });
         }
-        if (orderQuantity && availableQuantity && orderQuantity > availableQuantity) {
+        if (orderQuantity &&
+            availableQuantity &&
+            orderQuantity > availableQuantity) {
             return res.json({
                 success: false,
-                message: 'Insufficient quantity available in inventory'
+                message: 'Insufficient quantity available in inventory',
             });
         }
-        yield product_model_1.ProductModel.findByIdAndUpdate(productId, { $set: { "inventory.quantity": availableQuantity - orderQuantity } });
+        yield product_model_1.ProductModel.findByIdAndUpdate(productId, {
+            $set: {
+                'inventory.quantity': availableQuantity - orderQuantity,
+            },
+        });
         const result = yield order_service_1.orderServices.createNewOrderIntoDB(newOrder);
         (0, respond_1.respond)(res, 200, true, 'Order created successfully!', result);
     }
@@ -50,13 +58,15 @@ const getAllOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     //Order not found logic
     if (!result || (result === null || result === void 0 ? void 0 : result.length) === 0) {
         return res.json({
-            "success": false,
-            "message": "Order not found"
+            success: false,
+            message: 'Order not found',
         });
     }
-    email ? (0, respond_1.respond)(res, 200, true, `Orders fetched successfully for user email (${email})!`, result) : (0, respond_1.respond)(res, 200, true, 'Orders fetched successfully!', result);
+    email
+        ? (0, respond_1.respond)(res, 200, true, `Orders fetched successfully for user email (${email})!`, result)
+        : (0, respond_1.respond)(res, 200, true, 'Orders fetched successfully!', result);
 });
 exports.orderControlers = {
     createNewOrder,
-    getAllOrders
+    getAllOrders,
 };

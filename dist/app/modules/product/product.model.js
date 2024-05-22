@@ -43,7 +43,7 @@ const productSchema = new mongoose_1.Schema({
     variants: [variantSchema],
     inventory: {
         type: invetorySchema,
-        required: true
-    }
+        required: true,
+    },
 });
 exports.ProductModel = (0, mongoose_1.model)('Product', productSchema);
