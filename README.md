@@ -15,7 +15,7 @@ Welcome to the Product Management API, a sophisticated backend solution meticulo
 ## Installation
 
 1. **Clone the repository:**
-   git clone https://github.com/your-username/product-management-api.git
+   git clone https://github.com/Billal990/product-management-api
 
 2. **Install dependencies:**
    cd product-management-api
