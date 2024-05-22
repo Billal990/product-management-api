@@ -18,14 +18,14 @@ Welcome to the Product Management API, a sophisticated backend solution meticulo
    git clone https://github.com/Billal990/product-management-api
 
 2. **Install dependencies:**
-   cd product-management-api
+   cd product-management-api <br>
    npm install
 
 3. **Set up environment variables:**
    Create a .env file in the root directory and define the following variables:
 
-PORT=3000
-MONGODB_URI=<Your MongoDB connection URI>
+PORT=5000 <br>
+MONGODB_URI=`<Your MongoDB connection URI>`
 
 ## Usage
 
